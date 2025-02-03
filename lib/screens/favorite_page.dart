@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/product.dart';
-
+import '../models/product.dart';
 
 class FavoritePage extends StatelessWidget {
   final List<Product> favoriteProducts;

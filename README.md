@@ -41,8 +41,6 @@ Cloud Firestore - Database for storing ice cream data
 
 Clone the repository:
 
-git clone https://github.com/yourusername/melty-magic.git
-
 Navigate to the project directory:
 
 cd melty-magic
@@ -89,8 +87,3 @@ Push to your branch (git push origin feature-branch)
 
 Open a Pull Request
 
-📜 License
-
-This project is licensed under the MIT License.
-
-Made with ❤️ using Flutter & Firebase!

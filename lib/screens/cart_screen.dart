@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../model/cart_item.dart';
+import 'package:ice_cream_app/screens/payment.dart';
+import '../models/cart_item.dart';
 
-
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   final List<CartItem> cartItems;
   final Function(int, int) updateQuantity;
   final Function(int) removeItem;
@@ -14,10 +14,59 @@ class CartPage extends StatelessWidget {
     required this.removeItem,
   });
 
-  double get total => cartItems.fold(
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  double get total => widget.cartItems.fold(
         0,
         (sum, item) => sum + (item.price * item.quantity),
       );
+
+  void updateCartQuantity(int index, int newQuantity) {
+    if (newQuantity > 0) {
+      widget.updateQuantity(index, newQuantity);
+      setState(() {});
+    } else {
+      widget.removeItem(index);
+      setState(() {});
+    }
+  }
+
+  // Function to show the confirmation dialog before removing an item
+  Future<void> _showRemoveDialog(BuildContext context, int index) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible:
+          false, // Prevent closing the dialog by tapping outside
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm Removal'),
+          content: const Text(
+              'Are you sure you want to remove this item from the cart?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                // Close the dialog
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Remove the item
+                widget.removeItem(index);
+                // Close the dialog
+                Navigator.of(context).pop();
+              },
+              child: const Text('Remove'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +104,7 @@ class CartPage extends StatelessWidget {
 
               // Cart Items
               Expanded(
-                child: cartItems.isEmpty
+                child: widget.cartItems.isEmpty
                     ? const Center(
                         child: Text(
                           'Your cart is empty',
@@ -66,9 +115,9 @@ class CartPage extends StatelessWidget {
                         ),
                       )
                     : ListView.builder(
-                        itemCount: cartItems.length,
+                        itemCount: widget.cartItems.length,
                         itemBuilder: (context, index) {
-                          final item = cartItems[index];
+                          final item = widget.cartItems[index];
                           return Container(
                             margin: const EdgeInsets.only(bottom: 16),
                             padding: const EdgeInsets.all(12),
@@ -97,11 +146,12 @@ class CartPage extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(width: 12),
-                                
+
                                 // Product Details
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         item.name,
@@ -112,7 +162,7 @@ class CartPage extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 4),
                                       Text(
-                                        '${item.price}\$',
+                                        '\$${(item.price * item.quantity).toStringAsFixed(2)}',
                                         style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
@@ -127,7 +177,7 @@ class CartPage extends StatelessWidget {
                                   children: [
                                     IconButton(
                                       icon: const Icon(Icons.remove),
-                                      onPressed: () => updateQuantity(
+                                      onPressed: () => updateCartQuantity(
                                         index,
                                         item.quantity - 1,
                                       ),
@@ -141,7 +191,7 @@ class CartPage extends StatelessWidget {
                                     ),
                                     IconButton(
                                       icon: const Icon(Icons.add),
-                                      onPressed: () => updateQuantity(
+                                      onPressed: () => updateCartQuantity(
                                         index,
                                         item.quantity + 1,
                                       ),
@@ -152,7 +202,10 @@ class CartPage extends StatelessWidget {
                                 // Remove Button
                                 IconButton(
                                   icon: const Icon(Icons.close),
-                                  onPressed: () => removeItem(index),
+                                  onPressed: () {
+                                    // Show confirmation dialog before removing the item
+                                    _showRemoveDialog(context, index);
+                                  },
                                 ),
                               ],
                             ),
@@ -161,13 +214,31 @@ class CartPage extends StatelessWidget {
                       ),
               ),
 
-              // Checkout Button
-              if (cartItems.isNotEmpty)
+              // Total Price
+              if (widget.cartItems.isNotEmpty)
                 Padding(
-                  padding: const EdgeInsets.only(top: 16),
+                  padding: const EdgeInsets.only(top: 16, bottom: 10),
+                  child: Text(
+                    'Total: \$${total.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+
+              // Checkout Button
+              if (widget.cartItems.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Implement checkout logic
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PaymentPage(totalAmount: total),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.pink[100],

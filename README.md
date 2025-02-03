@@ -7,83 +7,66 @@ A new Flutter project.
 
 Welcome to Melty Magic, a beautifully designed Flutter application for ordering ice cream online. This app allows users to browse ice cream flavors, add them to their cart, and place orders seamlessly.
 
-🚀 Features
-Getting Started
-User Authentication: Login and Register using Firebase Authentication
+Documatation Ice Cream app using flutter
+## 1. Welcome Page or Screen Page
+Description:
+When the app is opened, the user will see a welcome screen featuring a beautiful ice cream image or Logo and the app name.
+Button for "Get Started" will also be displayed for navigation.
+Features:
+An attractive background image.
+Easy navigation buttons to move to the Login or Sign Up page.
+## 2. Login Page
+Description:
+Existing users will input their email and password to log in app .
+A "Forgot Password?" link will allow users to recover their accounts.
+Features:
+A form with two input fields (Email and Password).
+A button to navigate to the Home page after successful login.
+Sign Up Page
+Description:
+New users can register by providing their name, email, and password.
 
-Smooth UI: Clean and interactive design with a user-friendly experience
-
-Favorites List: Save favorite ice cream flavors
-
-Shopping Cart: Add and manage ice cream orders
-
-Secure Payments: Checkout process for placing orders
-
-Profile Management: Users can view orders and manage their account
-
-📸 Screenshots
+# Features:
+A form with three input fields (Name, Email, and Password).
+A button to navigate to the Home page after successfully signing up.
+## 3. Home Page (Menu)
+Description:
+Display list of available ice creams for the user to view .When user selects an ice cream navigate Detail Page
 
 
+## 4. Detail Page
+page that shows selected ice crem’s name , Description and Add to chart button when clicked navigate Cart apage
 
+## 5.Cart Page
+Description:
+Displays a list of all ice creams added to the cart, along with their prices and quantities.
+Allows the user to:
+Increase or decrease the quantity of each item.
+Cancel/remove any item from the cart.
+Proceed to checkout.
+Features:
+List of Items: Show ice cream name, quantity, and total price for each item.
+Quantity Adjustment: Buttons to increase (+) or decrease (-) the quantity.
+Remove Item: Option to cancel/remove an item from the cart.
+Checkout Button: Takes the user to the Checkout Page.
+## 6. Checkout Page
+Description:
+Displays a summary of the order, including the total price.
+Confirms the user’s decision to place the order.
+Features:
+Order Summary: List of all ice creams and their quantities.
+Total Price: Display the total amount the user has to pay.
+Place Order Button: Finalizes the order and navigates to the Thank You Page.
+Implementation Steps:
+Display the list of items with quantities and prices (similar to Cart Page).
+Calculate and show the total price dynamically.
+Add a Place Order button to confirm the purchase.
 
+## 7.Thank You Page
+Description:
+A simple page thanking the user for their order.
+Features:
+Thank You Message: A confirmation message, e.g., “Thank you for your order!”
+Back to Home Button: Navigates the user back to the Home Page.
 
-🛠 Tech Stack
-
-Flutter - Frontend development
-
-Firebase Authentication - Secure user login
-
-GetX - State management
-
-Cloud Firestore - Database for storing ice cream data
-
-📖 Installation
-
-Clone the repository:
-
-Navigate to the project directory:
-
-cd melty-magic
-
-Install dependencies:
-
-flutter pub get
-
-Run the app:
-
-flutter run
-
-🔥 Firebase Setup
-
-Create a Firebase project at Firebase Console
-
-Add an Android & iOS app inside Firebase
-
-Download the google-services.json (for Android) and GoogleService-Info.plist (for iOS) and place them inside the project:
-
-android/app/google-services.json
-
-ios/Runner/GoogleService-Info.plist
-
-Enable Authentication (Email/Password Sign-in) in Firebase Console
-
-Set up Cloud Firestore to store user and product data
-
-🧑‍💻 State Management with GetX
-
-The app uses GetX for efficient state management. Example of navigation:
-
-Get.to(() => CartPage());
-
-🤝 Contributing
-
-Fork the project
-
-Create a feature branch (git checkout -b feature-branch)
-
-Commit your changes (git commit -m 'Add new feature')
-
-Push to your branch (git push origin feature-branch)
-
-Open a Pull Request
 

@@ -1,63 +1,69 @@
 import 'package:flutter/material.dart';
-import '../model/cart_item.dart';
-import '../model/product.dart';
+import 'package:ice_cream_app/screens/profile_page.dart';
+import '../models/cart_item.dart';
+import '../models/product.dart';
 import 'detail_page.dart';
 import 'favorite_page.dart';
 import 'cart_page.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Homepage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<Homepage> {
   int _selectedIndex = 0;
   final List<Product> _products = [
     Product(
       name: 'Vanilla',
       price: 1.0,
-      imageUrl: 'https://media.istockphoto.com/id/1090251878/photo/ice-cream-balls-in-paper-cup.jpg?s=612x612&w=0&k=20&c=QlII4k-Q2phcY190xGomdSsGwv-ab4jStWIhl_d5ndI=',
+      imageUrl:
+          'https://media.istockphoto.com/id/1090251878/photo/ice-cream-balls-in-paper-cup.jpg?s=612x612&w=0&k=20&c=QlII4k-Q2phcY190xGomdSsGwv-ab4jStWIhl_d5ndI=',
     ),
     Product(
       name: 'Strawberry',
       price: 2.0,
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgP4B9kfefnfWIuJ-2TY8FF6wFxc92wj1cN6qRwLbRkDjcJQfbveogztNH68TYpLL94Oo&usqp=CAU',
+      imageUrl:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgP4B9kfefnfWIuJ-2TY8FF6wFxc92wj1cN6qRwLbRkDjcJQfbveogztNH68TYpLL94Oo&usqp=CAU',
     ),
     Product(
       name: 'Magnum',
       price: 1.5,
-      imageUrl: 'https://www.siftandsimmer.com/wp-content/uploads/2023/03/homemade-magnum-ice-cream-bars-featured.jpg',
+      imageUrl:
+          'https://www.siftandsimmer.com/wp-content/uploads/2023/03/homemade-magnum-ice-cream-bars-featured.jpg',
     ),
-    
     Product(
       name: 'Mango',
       price: 2.5,
-      imageUrl: 'https://veenaazmanov.com/wp-content/uploads/2017/08/Homemade-Mango-Ice-Cream-No-Churn-Recipe5.jpg',
+      imageUrl:
+          'https://veenaazmanov.com/wp-content/uploads/2017/08/Homemade-Mango-Ice-Cream-No-Churn-Recipe5.jpg',
     ),
     Product(
       name: 'Rolle',
       price: 1.0,
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwSH1xwdAsPBTNxEo_onULQJiiZ8mvE1tO7jhw9w5NpeJiytnLH79A4acpTPdZz4AQD7U&usqp=CAU',
+      imageUrl:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwSH1xwdAsPBTNxEo_onULQJiiZ8mvE1tO7jhw9w5NpeJiytnLH79A4acpTPdZz4AQD7U&usqp=CAU',
     ),
     Product(
       name: 'Cone vanilla',
       price: 1.5,
-      imageUrl: 'https://s7d1.scene7.com/is/image/mcdonaldsstage/DC_202106_0336_LargeVanillaCone_1564x1564:product-header-mobile?wid=1313&hei=1313&dpr=off',
+      imageUrl:
+          'https://s7d1.scene7.com/is/image/mcdonaldsstage/DC_202106_0336_LargeVanillaCone_1564x1564:product-header-mobile?wid=1313&hei=1313&dpr=off',
     ),
     Product(
       name: ' Cone oreo',
       price: 3.0,
-      imageUrl: 'https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipe%20Ramp%20Up%2F2022-06-Ice-Cream-Cones%2Fwaffle_cone_2_of_2',
+      imageUrl:
+          'https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipe%20Ramp%20Up%2F2022-06-Ice-Cream-Cones%2Fwaffle_cone_2_of_2',
     ),
     Product(
       name: 'chocolate',
       price: 3.5,
-      imageUrl: 'https://www.shutterstock.com/image-photo/two-scoops-chocolate-ice-cream-600nw-2485263183.jpg',
+      imageUrl:
+          'https://www.shutterstock.com/image-photo/two-scoops-chocolate-ice-cream-600nw-2485263183.jpg',
     ),
-    
-    
   ];
 
   final List<CartItem> _cartItems = [];
@@ -113,7 +119,9 @@ class _HomePageState extends State<HomePage> {
         updateQuantity: _updateCartItemQuantity,
         removeItem: _removeCartItem,
       ),
-      const Center(child: Text('Profile')),
+      ProfilePage(
+        
+      )
     ];
 
     return Scaffold(
@@ -268,7 +276,8 @@ class _MenuPageState extends State<MenuPage> {
                         ),
                       )
                     : GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: 0.85,
                           crossAxisSpacing: 15,
@@ -362,25 +371,3 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
